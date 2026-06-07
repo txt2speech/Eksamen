@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Struktur Mission</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="mission-bar">
+    <h2>Mission 1: Red Køge Kaffeblog! ☕</h2>
+    <p><strong>Brief fra kunden:</strong> Siden mangler en menu. Tilføj et <code>&lt;nav&gt;&lt;/nav&gt;</code> tag indeni din <code>&lt;header&gt;</code>, og se strukturen opdatere sig live til højre!</p>
+</div>
+
+<main class="sandbox-container">
+
+    <section class="editor-side">
+        <div class="editor-header">
+            <span class="dots"><span class="r"></span><span class="g"></span><span class="b"></span></span>
+            <span class="title">Projekt-Filer & Editor</span>
+        </div>
+
+        <div class="editor-workspace">
+            <div class="file-tree">
+                <h4>📁 projekt-mappe</h4>
+                <ul>
+                    <li class="file active-file">📄 index.html</li>
+                    <li class="file">📄 style.css</li>
+                    <li class="folder">
+                        📁 img
+                        <ul>
+                            <li class="image-file" onclick="visBilledHjælp('kaffe1.jpg')">🖼️ kaffe1.jpg</li>
+                            <li class="image-file" onclick="visBilledHjælp('kaffe2.jpg')">🖼️ kaffe2.jpg</li>
+                            <li class="image-file" onclick="visBilledHjælp('kaffe3.jpg')">🖼️ kaffe3.jpg</li>
+                        </ul>
+                    </li>
+                </ul>
+                <div id="file-tooltip" class="file-tooltip-hidden"></div>
+            </div>
+
+            <div class="editor-body">
+                <div class="line-numbers">
+                    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
+                </div>
+                <div id="codeEditor" contenteditable="true" spellcheck="false"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="browser-side">
+        <div class="browser-header">
+            <button id="toggleRoentgen" class="btn-roentgen">Skift visning</button>
+            <div class="search-bar">localhost:3000</div>
+        </div>
+
+        <div class="browser-content roentgen" id="livePreview">
+        </div>
+    </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

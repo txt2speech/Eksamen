@@ -1,0 +1,205 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Mission bar */
+.mission-bar {
+    background-color: #2d3748;
+    padding: 15px 20px;
+    border-bottom: 3px solid #3b82f6;
+    transition: background-color 0.4s ease;
+}
+.mission-bar h2 { font-size: 18px; margin-bottom: 5px; color: #f7fafc; }
+.mission-bar p { font-size: 14px; color: #cbd5e0; }
+.mission-bar code { background: #1a202c; padding: 2px 6px; border-radius: 4px; color: #f6ad55; font-family: monospace; }
+
+/* Hovedcontainer */
+.sandbox-container {
+    display: flex;
+    flex: 1;
+    padding: 15px;
+    gap: 15px;
+    overflow: hidden;
+}
+
+.editor-side, .browser-side {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+/* --- EDITOR LAYOUT --- */
+.editor-side { background-color: #1e1e1e; }
+.editor-header { background-color: #252526; padding: 10px; display: flex; gap: 10px; color: #858585; font-size: 13px; border-bottom: 1px solid #333; }
+.dots span { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; }
+.r { background: #ff5f56; } .g { background: #ffbd2e; } .b { background: #27c93f; }
+
+.editor-workspace {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Venstre del: Filstruktur */
+.file-tree {
+    width: 160px;
+    background-color: #252526;
+    border-right: 1px solid #333;
+    padding: 15px 10px;
+    font-size: 13px;
+    color: #cccccc;
+    user-select: none;
+}
+.file-tree h4 { font-size: 11px; text-transform: uppercase; color: #858585; margin-bottom: 10px; }
+.file-tree ul { list-style: none; padding-left: 5px; }
+.file-tree li { margin: 8px 0; cursor: pointer; }
+.image-file { color: #3b82f6; font-weight: bold; padding-left: 10px; }
+.active-file { background: #37373d; color: #fff; padding: 2px 4px; border-radius: 3px; }
+
+.file-tooltip-hidden { display: none; }
+.file-tooltip-visible {
+    margin-top: 15px;
+    background: #1e1e1e;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #3b82f6;
+    font-size: 11px;
+    color: #ddd;
+}
+
+/* Højre del: Skrivefeltet */
+.editor-body {
+    display: flex;
+    flex: 1;
+    font-family: 'Consolas', 'Courier New', Courier, monospace;
+    font-size: 15px;
+    line-height: 1.5;
+    overflow-y: auto;
+}
+
+.line-numbers {
+    width: 35px;
+    background-color: #1e1e1e;
+    color: #5a5a5a;
+    text-align: right;
+    padding-top: 20px;
+    padding-right: 8px;
+    border-right: 1px solid #2d2d2d;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+}
+
+#codeEditor {
+    flex: 1;
+    padding: 20px;
+    color: #d4d4d4;
+    outline: none;
+    white-space: pre;
+    background-color: #1e1e1e;
+}
+
+/* --- BROWSER / RESULTAT --- */
+.browser-side { background-color: #ffffff; color: #333; }
+.browser-header { background-color: #efefef; padding: 10px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #ccc; }
+.search-bar { flex: 1; background: #fff; padding: 4px; text-align: center; border-radius: 4px; font-size: 13px; color: #666; border: 1px solid #ddd; }
+.btn-roentgen { background: #3b82f6; color: white; border: none; padding: 5px 12px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; }
+
+.browser-content { padding: 20px; display: flex; flex-direction: column; gap: 15px; height: 100%; overflow-y: auto; }
+
+/* RØNTGENSYN PÅ LIVE-ELEMENTERNE */
+.roentgen header { border: 2px dashed #9bc53d; background: rgba(155, 197, 61, 0.03); padding: 15px; position: relative; }
+.roentgen nav { border: 2px dashed #e75a7c; background: rgba(231, 90, 124, 0.03); padding: 10px; min-height: 45px; margin-top: 10px; }
+.roentgen main { border: 2px dashed #408dff; background: rgba(64, 141, 255, 0.03); padding: 15px; margin-top: 10px; }
+.roentgen section { border: 2px dashed #f39c12; background: rgba(243, 156, 18, 0.03); padding: 15px; display: flex; gap: 10px; justify-content: space-between; }
+.roentgen footer { border: 2px dashed #6f42c1; background: rgba(111, 66, 193, 0.03); padding: 15px; margin-top: 10px; }
+
+/* CSS mærkater på kasserne */
+.roentgen header::before, .roentgen nav::before, .roentgen main::before, .roentgen section::before, .roentgen footer::before {
+    display: block; width: fit-content; padding: 2px 6px; font-size: 11px; font-family: monospace; color: white; border-radius: 3px; margin-bottom: 5px;
+}
+.roentgen header::before { content: "<header>"; background: #9bc53d; }
+.roentgen nav::before { content: "<nav>"; background: #e75a7c; }
+.roentgen main::before { content: "<main>"; background: #408dff; }
+.roentgen section::before { content: "<section> (Flexbox aktiv)"; background: #f39c12; }
+.roentgen footer::before { content: "<footer>"; background: #6f42c1; }
+
+/* Links i røntgensyn */
+.roentgen nav a { border: 1px solid #e75a7c; padding: 2px 6px; margin-right: 5px; background: rgba(231, 90, 124, 0.1); font-size: 12px; color: #e75a7c; text-decoration: none; border-radius: 3px; }
+
+/* Simulerede billeder i Level 4 */
+.roentgen section img {
+    flex: 1; max-width: 31%; border: 2px dashed #e67e22; background: rgba(230, 126, 34, 0.1); padding: 25px 5px; text-align: center; font-size: 0; min-height: 60px; content: ""; position: relative;
+}
+.roentgen section img::after {
+    content: "<img>"; display: block; font-size: 12px; font-family: monospace; color: #e67e22; text-align: center;
+}
+
+/* --- PAGE DETAILS --- */
+.info-popup-animation {
+    margin-top: auto;
+    background: #f8fafc;
+    border-left: 5px solid #27c93f;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    animation: glideOp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes glideOp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.info-kort { padding: 15px; color: #2d3748; }
+.info-kort h3 { color: #27c93f; margin-bottom: 8px; font-size: 16px; }
+.info-kort p { font-size: 13px; color: #4a5568; line-height: 1.4; }
+
+.btn-naeste {
+    background-color: #27c93f; color: white; border: none; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 12px; font-size: 13px; transition: background 0.2s;
+}
+.btn-naeste:hover { background-color: #21a934; }
+.knap-container { display: flex; gap: 10px; margin-top: 12px; }
+
+.btn-tilbage {
+    background-color: #e2e8f0; color: #4a5568; border: 1px solid #cbd5e0; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 13px; transition: background 0.2s;
+}
+.btn-tilbage:hover { background-color: #cbd5e0; color: #2d3748; }
+
+/* Gør den fastlåste standard-kode grå */
+.laast {
+    color: #5a5a5a !important;
+    user-select: none;
+    pointer-events: none;
+    font-weight: normal !important;
+}
+
+/* DET AKTIVE ARBEJDSOMRÅDE - STRØMLINET */
+/* DET AKTIVE ARBEJDSOMRÅDE - STRØMLINET */
+.aktivt-felt {
+    display: inline-block;
+    min-width: 150px;
+    min-height: 22px;
+    vertical-align: top;
+    background-color: rgba(59, 130, 246, 0.1);
+    outline: 1px dashed #3b82f6;
+    outline-offset: 4px;
+    border-radius: 2px;
+    color: #fff;
+    padding: 0 5px;
+}
